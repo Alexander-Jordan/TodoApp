@@ -10,20 +10,6 @@ body {
     color: white;
 }
 
-header, form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
-}
-
-form input, form button {
-    padding: 0.5rem;
-    font-size: 2rem;
-    border: none;
-    background-color: white;
-}
-
 form button {
     color: black;
     transition: .2s;
