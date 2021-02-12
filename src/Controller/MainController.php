@@ -9,11 +9,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'main')]
-    public function index(): Response
+    public function main(): Response
     {
-        $todoTest = new todo("Clean", false);
+        $todoList = new todoList();
+        $todoList->addToList(new todo("Clean", false));
         return $this->render('main/main.html.twig', [
-            'todoTest' => $todoTest,
+            'todoList' => $todoList,
         ]);
     }
 }
@@ -25,5 +26,12 @@ class todo{
     {
         $this->title = $title;
         $this->isDone = $isDone;
+    }
+}
+
+class todoList{
+    public $todos = array();
+    function addToList($todo){
+        array_push($this->todos, $todo);
     }
 }

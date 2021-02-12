@@ -13,11 +13,13 @@
     </button>
     <div class="todo-container">
         <ul class="todo-list">
+            {% for todo in todoList.todos %}
             <div>
                 <button>Checked</button>
-                <li>{{ todoTest.title }}</li>
+                <li>{{ todo.title }}</li>
                 <button>Delete</button>
             </div>
+            {% endfor %}
         </ul>
     </div>
 </form>
