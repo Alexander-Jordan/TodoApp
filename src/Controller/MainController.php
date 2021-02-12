@@ -11,9 +11,19 @@ class MainController extends AbstractController
     #[Route('/', name: 'main')]
     public function index(): Response
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/MainController.php',
+        $todoTest = new todo("Clean", false);
+        return $this->render('main/main.html.twig', [
+            'todoTest' => $todoTest,
         ]);
+    }
+}
+
+class todo{
+    public $title;
+    public $isDone;
+    function __construct($title, $isDone)
+    {
+        $this->title = $title;
+        $this->isDone = $isDone;
     }
 }
