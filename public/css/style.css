@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Bookman', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background-color: rgb(121, 182, 152);
+    color: white;
+}
+
+header, form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
+}
+
+form input, form button {
+    padding: 0.5rem;
+    font-size: 2rem;
+    border: none;
+    background-color: white;
+}
+
+form button {
+    color: black;
+    transition: .2s;
+    cursor: pointer;
+}
+
+form button:hover {
+    color: white;
+    background-color: black;
+}
+
