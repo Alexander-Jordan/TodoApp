@@ -4,3 +4,8 @@ header, form {
     align-items: center;
     min-height: 10vh;
 }
+
+a {
+    color:red;
+    text-decoration: none;
+}

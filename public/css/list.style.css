@@ -23,3 +23,17 @@ form input, form button {
     list-style: none;
 }
 
+a:link a:visited{
+    color: black;
+    background-color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+a:hover a:active{
+    color: white;
+    background-color: black;
+}
+

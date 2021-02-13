@@ -21,3 +21,8 @@ form button:hover {
     background-color: black;
 }
 
+a {
+    color:red;
+    text-decoration: none;
+}
+
