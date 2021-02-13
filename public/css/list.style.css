@@ -1,39 +1,70 @@
-header, form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 10vh;
-}
-
 form input, form button {
     padding: 0.5rem;
     font-size: 2rem;
     border: none;
-    background-color: white;
+    background: white;
 }
 
-.todo-container{
+form button {
+    color: black;
+    transition: .2s;
+    cursor: pointer;
+}
+
+form button:hover {
+    color: white;
+    background-color: black;
+}
+
+.todo-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.todo-list{
+.todo-list {
     min-width: 30%;
     list-style: none;
 }
 
-a:link a:visited{
+.todo {
+    margin: 0.5rem;
+    background: white;
     color: black;
-    background-color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all ease-in 0.2s;
 }
 
-a:hover a:active{
+.todo li {
+    flex: 1;
+}
+
+.delete-btn, .complete-btn {
+    background: red;
     color: white;
-    background-color: black;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.complete-btn {
+    background: greenyellow;
+}
+
+.todo-item {
+    padding: 0rem 0.5rem;
+}
+
+.fa-trash, .fa-check {
+    pointer-events: none;
+}
+
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
 }
 

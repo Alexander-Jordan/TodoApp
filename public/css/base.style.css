@@ -2,27 +2,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Bookman', 'Arial Narrow', Arial, sans-serif;
 }
 
 body {
     background-color: rgb(121, 182, 152);
     color: white;
+    font-family: 'Bookman', 'Arial Narrow', Arial, sans-serif;
+    min-height: 100vh;
 }
 
-form button {
-    color: black;
-    transition: .2s;
-    cursor: pointer;
+header {
+    font-size: 1.5rem;
 }
 
-form button:hover {
-    color: white;
-    background-color: black;
+header, form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 10vh;
 }
-
-a {
-    color:red;
-    text-decoration: none;
-}
-
