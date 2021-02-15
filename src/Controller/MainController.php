@@ -3,10 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Todo;
-use App\Form\Type\TodoFormType;
 use App\Repository\TodoRepository;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,19 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     #[Route('/', name: 'list')]
-    public function list(TodoRepository $todoRepository, Request $request): Response
+    public function list(TodoRepository $todoRepository): Response
     {
-        $newTodo = new Todo();
-
-        $todoForm = $this->createForm(TodoFormType::class, $newTodo);
-
-        $todoForm->handleRequest($request);
-        if ($todoForm->isSubmitted() && $todoForm->isValid())
-        {
-            $this->saveToDB($newTodo);
-            return $this->redirectToRoute('task_success');
-        }
-
         $todos_db = $todoRepository->findAll();
         $todos = [];
 
@@ -37,9 +23,46 @@ class MainController extends AbstractController
             array_unshift($todos, $t);
         }
         return $this->render('main/list.html.twig', [
-            'todoForm' => $todoForm->createView(),
             'todos' => $todos,
         ]);
+    }
+
+    #[Route('/create', name: 'create', methods: ['POST'])]
+    public function createNewTodo(Request $request)
+    {
+        $title = trim($request->request->get('title'));
+        if(!empty($title))
+        {
+            $todo = $this->createTodo($title);
+            $this->saveToDB($todo);
+        }
+        return $this->redirectToRoute('list');
+    }
+
+    #[Route('/update/{id}', name: 'update')]
+    public function updateTodo($id, TodoRepository $todoRepository)
+    {
+        $todo = $todoRepository->find($id);
+        $todo->setCompleted(!$todo->getCompleted());
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('list');
+    }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function deleteTodo(Todo $id)
+    {
+        $eventManager = $this->getDoctrine()->getManager();
+        $eventManager->remove($id);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->redirectToRoute('list');
+    }
+
+    function createTodo($title) : Todo
+    {
+        $newTodo = new Todo();
+        $newTodo->setTitle($title);
+        $newTodo->setCompleted(false);
+        return $newTodo;
     }
 
     function saveToDB(Todo $todo)
@@ -47,17 +70,6 @@ class MainController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($todo);
         $entityManager->flush();
-    }
-
-    public function getTodo(int $id)
-    {
-        $todo = $this->getDoctrine()->getRepository(Todo::class)->find($id);
-    }
-
-    public function getTodos()
-    {
-        $todos = $this->getDoctrine()->getRepository(Todo::class)->findAll();
-        return $todos;
     }
 }
 
