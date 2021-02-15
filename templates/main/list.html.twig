@@ -19,6 +19,17 @@
 </form>
 <div class="todo-container">
     <ul class="todo-list">
+        {% for todo in todos %}
+            <div class="todo {% if todo.completed %}completed{% endif %}">
+                <li class="todo-item">{{ todo.title }}</li>
+                <button class="complete-btn">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button id="{{ todo.id }}" class="delete-btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}

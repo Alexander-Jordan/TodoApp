@@ -11,7 +11,9 @@ function addTodo(event)
 {
     event.preventDefault();
     
-    createTodoElement(createTodo());
+    let todo = createTodo();
+    saveToLocalStorage(todo)
+    createTodoElement(todo);
     
     $(".todo-input").val("");
 }
@@ -20,12 +22,13 @@ function createTodo()
 {
     let todo;
     todo = new todoObj($(".todo-input").val());
-    saveToLocalStorage(todo);
     return todo;
 }
 
 function handleTodo(event)
 {
+    event.preventDefault();
+
     const item = event.target;
     const index = Array.from(item.parentElement.parentNode.children).indexOf(item.parentElement);
     const todos = loadFromLocalStorage();
